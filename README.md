@@ -3,7 +3,7 @@
 
 A colection of example Arduino sketches to interact with the sensors and features present on the Globaltronic Discover32 ESP32-powered board.
 
-There are sensor-specific examples:
+Sensor-specific examples:
 
 - [BMP280 Digital Pressure Sensor](https://github.com/Globaltronic/discover32/tree/master/examples/BMP280_Digital_Pressure_Sensor)
 - [LSM6DS3 3D Accelerometer Gyroscope](https://github.com/Globaltronic/discover32/tree/master/examples/LSM6DS3_3D_Accelerometer_Gyroscope)
@@ -11,7 +11,7 @@ There are sensor-specific examples:
 - [PCF85063TP Real-Time Clock and Calendar](https://github.com/Globaltronic/discover32/tree/master/examples/PCF85063TP_Real-Time_Clock_Calendar)
 - [SSD1306 OLED Screen](https://github.com/Globaltronic/discover32/tree/master/examples/SSD1306_OLED)
 
-The following examples combine multiple sensors:
+Multi-sensor examples:
 
 - [Discover32 Sensors](https://github.com/Globaltronic/discover32/tree/master/examples/Discover32_Sensors)
 - [Discover32 Sensors OLED](https://github.com/Globaltronic/discover32/tree/master/examples/Discover32_Sensors_OLED)

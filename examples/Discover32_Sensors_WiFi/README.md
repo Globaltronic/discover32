@@ -3,6 +3,9 @@
 
 This example sketch initializes the various sensors on the Discover32 board, connects to a specified WiFi ssid, prints the IP address to the serial monitor and serves a simple web-page or a JSON with a selection of the sensors values when requested.
 
+## Setup
+Change the ssid and password to those of your local WiFi network.
+
 ## Dependencies
 * [Adafruit_BMP280](https://github.com/adafruit/Adafruit_BMP280_Library)
 * [Adafruit_LSM6DS](https://github.com/adafruit/Adafruit_LSM6DS)

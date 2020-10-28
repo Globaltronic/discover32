@@ -18,10 +18,10 @@ Multi-sensor examples:
 - [Discover32 Sensors WiFi](https://github.com/Globaltronic/discover32/tree/master/examples/Discover32_Sensors_WiFi)
 
 ## Board
-![DISCOVER32FEATURUES](/assets/Discover32Features.png)
+![DISCOVER32FEATURUES](/assets/addresses.png)
 
 ## DIP Switches Settings and I2C Addresses
-![DISCOVER32BOARD](/assets/DISCOVER32BOARD.png)
+![DISCOVER32BOARD](/assets/board.png)
 
 ## Dependencies
 * [Adafruit_BMP280](https://github.com/adafruit/Adafruit_BMP280_Library)

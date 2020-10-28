@@ -19,7 +19,6 @@ PCD85063TP RTclock;
 Adafruit_Si7021 si7021;
 WebServer server(80);
 
-
 const char* ssid     = "yourssid";
 const char* password = "yourpassword";
 bool led_enabled = false;
@@ -47,8 +46,6 @@ void setup() {
   }
 
   RTclock.begin();
-
-  
 
   pinMode(17, OUTPUT);
 

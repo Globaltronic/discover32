@@ -4,7 +4,7 @@
 #define I2C_SCL 22
 
 bool enableHeater = false;
-uint8_t loopCnt = 0;
+uint8_t counter = 0;
 
 Adafruit_Si7021 si7021;
 
@@ -23,17 +23,17 @@ void setup() {
 void loop() {
   Serial.println();
   
-  Serial.print("Humidity: ");
-  Serial.print(si7021.readHumidity());
-  Serial.println(" %");
   Serial.print("Temperature: ");
   Serial.print(si7021.readTemperature());
   Serial.println(" C");
+  Serial.print("Humidity: ");
+  Serial.print(si7021.readHumidity());
+  Serial.println(" %");
   
   delay(1000);
 
   /* Toggle heater enabled state every 30 seconds. */
-  if (++loopCnt == 30) {
+  if (++counter == 30) {
     enableHeater = !enableHeater;
     si7021.heater(enableHeater);
     Serial.print("Heater State: ");
@@ -42,6 +42,6 @@ void loop() {
     else
       Serial.println("DISABLED");
        
-    loopCnt = 0;
+    counter = 0;
   }
 }

@@ -3,7 +3,7 @@
 
 ![Discover32 Foto](/assets/foto.jpg)
 
-A colection of Arduino sketches to interact with the sensors and features present on the [Globaltronic Discover32](/assets/datasheet_brief.pdf) board (a ESP32-based board).
+A colection of Arduino sketches to interact with the sensors and features present on the Globaltronic Discover32 board (a ESP32-based board).
 
 Sensor-specific examples:
 
@@ -20,6 +20,7 @@ Multi-sensor examples:
 - [Discover32 Sensors WiFi](https://github.com/Globaltronic/discover32/tree/master/examples/Discover32_Sensors_WiFi)
 
 ## Board
+The [Brief Datasheet](/assets/datasheet_brief.pdf).
 ![Discover32 Board](/assets/board.png)
 
 ## DIP Switches Settings and I2C Addresses

@@ -5,6 +5,8 @@
 #include <Adafruit_Si7021.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <WiFi.h>
+#include <time.h>
 
 #define I2C_SDA 21
 #define I2C_SCL 22
@@ -19,6 +21,13 @@ Adafruit_LSM6DS3 lsm6ds3;
 PCD85063TP RTclock;
 Adafruit_Si7021 si7021;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+const char* ssid     = "yourssid";
+const char* password = "yourpassword";
+bool led_enabled = false;
+const char* ntpServer = "pool.ntp.org";
+const long gmtOffset_sec = 0;           // Greenwich Mean Time (GMT) offset
+const int daylightOffset_sec = 0;       // 3600 during summer time (DST)
 
 void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
@@ -44,12 +53,71 @@ void setup() {
   }
   RTclock.begin();
 
+  pinMode(17, OUTPUT);
+  digitalWrite(17, HIGH);       // turn off led (logic inverted)
+
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0,4);
+  display.println("Connecting to");
+  display.println(ssid);
+  display.display();
+
+  WiFi.begin(ssid, password);
+  int count = 0;
+  while (WiFi.status() != WL_CONNECTED) {
+    led_enabled = !led_enabled;
+    digitalWrite(17, led_enabled);
+    if (count == 20) {
+      WiFi.mode(WIFI_OFF);
+      digitalWrite(17, HIGH);       // turn off led (logic inverted)
+      
+      display.println("Connection Failed");
+      display.display();
+      
+      setSpecificTime();
+
+      delay(2000);
+      return;
+    }
+    count++;
+    delay(500);
+  }
+
+  digitalWrite(17, LOW);       // turn on led (logic inverted)
+  
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+
+  display.println("Setting ntp time");
+  display.display();
+
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo)){
+    display.clearDisplay();
+    display.println("Failed to obtain time");
+    display.display();
+
+    WiFi.mode(WIFI_OFF);
+    digitalWrite(17, HIGH);       // turn off led (logic inverted)
+    
+    setSpecificTime;
+
+    delay(2000);
+    return;
+  }
+
   RTclock.stopClock();
-  RTclock.fillByYMD(2020,10,9);
-  RTclock.fillByHMS(18,00,00);
-  RTclock.fillDayOfWeek(FRI);
+  RTclock.fillDayOfWeek(timeinfo.tm_wday);
+  RTclock.fillByYMD(timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday);
+  RTclock.fillByHMS(timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
   RTclock.setTime();
   RTclock.startClock();
+
+  WiFi.mode(WIFI_OFF);
+
+  delay(1000);
+  digitalWrite(17, HIGH);       // turn off led (logic inverted)
 }
 
 void loop() {
@@ -64,6 +132,14 @@ void loop() {
   showyaccel();
 }
 
+void setSpecificTime(void) {
+  RTclock.stopClock();
+  RTclock.fillByYMD(2020,10,9);
+  RTclock.fillByHMS(18,00,00);
+  RTclock.fillDayOfWeek(FRI);
+  RTclock.setTime();
+  RTclock.startClock();
+}
 
 #define LOGO_HEIGHT   58
 #define LOGO_WIDTH    60

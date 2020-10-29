@@ -2,7 +2,7 @@
 # Globaltronic Discover32
 
 ![Discover32 Foto](/fotos/top_view.jpg)
-![Discover32 Foto](/fotos/board_glbt.jpg)
+
 A colection of Arduino sketches to interact with the sensors and features present on the Globaltronic Discover32 board (a ESP32-based board).
 
 Sensor-specific examples:

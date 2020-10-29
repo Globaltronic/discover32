@@ -18,7 +18,7 @@ void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
   Serial.begin(115200);
 
-  Serial.println("Discover Board Sensors test");
+  Serial.println("Discover32 Sensors test");
 
   if (!bmp280.begin(BMP_I2C_ADDR, BMP280_CHIPID)) {
     Serial.println("Could not find a valid BMP280 sensor!");

@@ -10,8 +10,8 @@ This example sketch initializes the various sensors on the Discover32 board, con
 
 ## Usage
 <p>Once it is connected over WiFi, the Discover32's IP address appears on the display.</p>
-<p>On a device connected to the same network, connect to that IP address using a web browser to get a web page with the sensors values</p>
-<p>Add "/api" at the end to get the values in JSON format</p>
+<p>On a device connected to the same network, connect to that IP address using a web browser to get a web page with the sensors values.</p>
+<p>Add "/api" at the end to get the values in JSON format.</p>
 
 ## Dependencies
 * [Adafruit_BMP280](https://github.com/adafruit/Adafruit_BMP280_Library)

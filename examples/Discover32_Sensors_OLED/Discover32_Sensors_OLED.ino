@@ -95,7 +95,7 @@ void setup() {
 
   struct tm timeinfo;                                               // create time structure
   
-  if(!getLocalTime(&timeinfo)){                                     // try to get time info and save it on the timeinfo structure
+  if(!getLocalTime(&timeinfo)){                                     // try to get time info and save it to the timeinfo structure
     display.println("Failed to obtain time");
     display.display();
 
@@ -109,9 +109,9 @@ void setup() {
     return;
   }
 
-  if (timeinfo.tm_isdst > 0) {
-    configTime(gmtOffset * 3600, 3600, ntpServer);
-    getLocalTime(&timeinfo);
+  if (timeinfo.tm_isdst > 0) {                                      // verify if it's summer time (DST)
+    configTime(gmtOffset * 3600, 3600, ntpServer);                  // configure time with summer time offset
+    getLocalTime(&timeinfo);                                        // get time info and save it to the timeinfo structure
   }
 
   RTclock.stopClock();                                                                // stop the real-time clock

@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
  
 #define PIN 13
+#define BRIGHTNESS 25
 // from http://www.esp32learning.com/code/esp32-and-ws2812b-rgb-led-example.php
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
@@ -22,6 +23,7 @@ for (int k = 0; k < 2; k++) {
 pixels.setPixelColor(0, pixels.Color(i * 255, j * 255, k * 255)); // Moderately bright green color.
 pixels.show(); // This sends the updated pixel color to the hardware.
 delay(200); // Delay for a period of time (in milliseconds).
+pixels.setBrightness(BRIGHTNESS); 
 }
 }
 }

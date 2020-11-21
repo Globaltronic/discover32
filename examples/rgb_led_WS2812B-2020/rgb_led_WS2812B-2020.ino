@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
  
-#define PIN 15
+#define PIN 13
 // from http://www.esp32learning.com/code/esp32-and-ws2812b-rgb-led-example.php
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest

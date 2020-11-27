@@ -21,7 +21,7 @@ Multi-sensor examples:
 - [Discover32 Sensors WiFi](https://github.com/Globaltronic/discover32/tree/master/examples/Discover32_Sensors_WiFi)
 
 ## Board
-The [Brief Datasheet](/documents/datasheet_brief.pdf).
+The [Brief Datasheet](/documents/Brief datasheet DISCOVER32.pdf).
 ![Discover32 Board](/documents/board.png)
 
 ## DIP Switches Settings and I2C Addresses

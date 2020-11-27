@@ -7,6 +7,7 @@
 #include <Adafruit_SSD1306.h>
 #include <WiFi.h>
 #include <time.h>
+#include <FastLED.h>
 
 #define I2C_SDA 21                      // I2C data line
 #define I2C_SCL 22                      // I2C clock line
@@ -21,6 +22,7 @@ Adafruit_LSM6DS3 lsm6ds3;
 PCD85063TP RTclock;
 Adafruit_Si7021 si7021;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+CRGB leds[1];
 
 const char* ssid     = "yourssid";        // replace with the name of the WiFi netwoork
 const char* password = "yourpassword";    // replace with the WiFi network password
@@ -34,22 +36,34 @@ void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
   Serial.begin(115200);
 
+  FastLED.addLeds<WS2812B, 13, GRB>(leds, 1);                       // add WS2812B on data pin13, GRB mode, 1 led
+  leds[0] = CRGB::Black;                                            // change led state to black
+  FastLED.show();                                                   // show led state
+
   Serial.println("Discover32 Sensors OLED test");
 
   if (!bmp280.begin(BMP_I2C_ADDR, BMP280_CHIPID)) {                 // try to initialize BMP280 sensor
     Serial.println("Could not find a valid BMP280 sensor!");
+    leds[0] = CRGB::Orange;                                         // led color if component initialization fails
+    FastLED.show();
     while (1);                                                      // loop forever
   }
   if (!lsm6ds3.begin_I2C(LSM_I2C_ADDR, &Wire, LSM6DS3_CHIP_ID)) {   // try to initialize LSM6DS3 sensor
     Serial.println("Could not find a valid LSM6DS3 sensor!");
+    leds[0] = CRGB::Yellow;                                         // led color if component initialization fails
+    FastLED.show();
     while (1);                                                      // loop forever
   }
   if (!si7021.begin()) {                                            // try to initialize Si7021 sensor
     Serial.println("Could not find a valid Si7021 sensor!");
+    leds[0] = CRGB::Blue;                                           // led color if component initialization fails
+    FastLED.show();
     while (1);                                                      // loop forever
   }
   if(!display.begin(SSD1306_SWITCHCAPVCC, SSD_I2C_ADDR)) {          // try to initialize SSD1306 display
     Serial.println("Could not find a valid SSD1306 screen!");
+    leds[0] = CRGB::White;                                          // led color if component initialization fails
+    FastLED.show();
     while (1);                                                      // loop forever
   }
   RTclock.begin();                                                  // Initialize Real-Time clock
@@ -139,6 +153,7 @@ void loop() {
   showaltitude();
   showxaccel();
   showyaccel();
+  showrgb();
 }
 
 /* Set a specific time and date, in case ntp time can't be reached */
@@ -443,4 +458,48 @@ void showyaccel(void) {
     
     delay(50);
   }
+}
+
+/* Show RGB led */
+void showrgb(void) {
+  display.setTextSize(4);
+  display.setTextColor(SSD1306_WHITE);
+  display.clearDisplay();
+  display.setCursor(0,20);
+  
+  #define RGB_INTERVAL 10
+
+  display.print("R");
+  display.display();
+
+  /* Transition from Red to Green. */
+  for (int i = 0; i <= 255; i++) {
+    leds[0] = CRGB(255 - i, i, 0);
+    FastLED.show();
+    delay(RGB_INTERVAL);
+  }
+
+  display.print(" G ");
+  display.display();
+  
+  /* Transition from Green to Blue. */
+  for (int i = 0; i <= 255; i++) {
+    leds[0] = CRGB(0, 255 - i, i);
+    FastLED.show();
+    delay(RGB_INTERVAL);
+  }
+
+  display.print("B");
+  display.display();
+  
+  /* Transition from Blue to Red. */
+  for (int i = 0; i <= 255; i++) {
+    leds[0] = CRGB(i, 0, 255 - i);
+    FastLED.show();
+    delay(RGB_INTERVAL);
+  }
+
+  /* Turn off led. */
+  leds[0] = CRGB::Black;
+  FastLED.show();
 }

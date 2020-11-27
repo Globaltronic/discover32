@@ -1,7 +1,7 @@
 
 # Discover32 Sensors OLED example sketch
 
-This example sketch initializes the various sensors on the Discover32 board, connects to a WiFi network to set time from a ntp server and cyclically displays to the screen a scrolling bitmap logo and a selection of the values provided by the sensors.
+This example sketch initializes the various sensors on the Discover32 board, connects to a WiFi network to set time from a ntp server and cyclically displays to the screen a scrolling bitmap logo and a selection of the values provided by the sensors, plus RGB.
 
 ## Setup
 <p>Replace the ssid and password to those of your local WiFi network.</p>
@@ -16,3 +16,4 @@ This example sketch initializes the various sensors on the Discover32 board, con
 * [Adafruit_Si7021](https://github.com/adafruit/Adafruit_Si7021)
 * [Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)
 * [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
+* [FastLED](https://github.com/FastLED/FastLED)
